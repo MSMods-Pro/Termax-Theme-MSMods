@@ -1,0 +1,41 @@
+ZSH_THEME="MSMods"
+export ZSH=$HOME/.oh-my-zsh
+plugins=(git)
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
+[[ -f ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+clear
+echo -e "\033[1;36m[*] BOOTING MSMods Pro v2.0..."
+echo -ne "\033[1;35m[LOADING] \033[1;32m"
+for i in {1..30}; do echo -ne "█"; sleep 0.015; done
+echo -e "\033[0m"
+sleep 0.2
+clear
+
+draw_banner() {
+    local BOX_WIDTH=58
+    local C='\033[0;36m'
+    local RS='\033[0m'
+    print_center() {
+        local text="$1"
+        local len=${#text}
+        local sp=$(( (BOX_WIDTH - 2 - len) / 2 ))
+        printf "${C} ║%*s${RS}%s${C}%*s║${RS}\n" $sp "" "$text" $(( BOX_WIDTH - 2 - len - sp )) ""
+    }
+    draw_line() {
+        printf "${C} %s" "$1"
+        for ((i=0; i<BOX_WIDTH-2; i++)); do printf "═"; done
+        printf "%s${RS}\n" "$2"
+    }
+    draw_line "╔" "╗"
+    print_center ""
+    figlet -c -f ASCII-Shadow -w $BOX_WIDTH "\PROC" 2>/dev/null | lolcat || echo -e "  \PROC" | lolcat
+    print_center ""
+    print_center "SYSTEM: ONLINE  |  MSMods Pro v2.0"
+    print_center "github.com/MSMods-Pro | t.me/MSModsPro"
+    print_center ""
+    draw_line "╚" "╝"
+}
+
+draw_banner
